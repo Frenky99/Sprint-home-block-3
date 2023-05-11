@@ -1,7 +1,20 @@
 <template>
   <q-page class="q-px-xl">
-    <h2>Todo</h2>
+    <h2 class="text-center">Todo</h2>
     <q-list>
+      <div>
+        <q-input
+          @keyup.enter="addTask"
+          rounded
+          outlined
+          v-model="addToNote"
+          placeholder="enter a note"
+        >
+          <template v-slot:append>
+            <q-btn @click="addTask" round dense flat icon="add" />
+          </template>
+        </q-input>
+      </div>
       <!-- clickable делает так, чтобы чек бокс снова нажимался, если бы мы не прописывали все это, то у нас бы не отрабатывала стилистика при нажатии на галку -->
       <q-item
         clickable
@@ -42,6 +55,7 @@
 export default {
   data() {
     return {
+      addToNote: "",
       tasks: [
         { title: "Unicorn 1", done: false, id: 1 },
         { title: "Unicorn 2", done: false, id: 2 },
@@ -51,7 +65,28 @@ export default {
   },
   methods: {
     clickDelete(index) {
-      this.tasks.splice(index, 1);
+      this.$q
+        .dialog({
+          title: "Delete Todo",
+          message: "Delete party note?",
+          cancel: true,
+          persistent: true,
+        })
+        .onOk(() => {
+          this.tasks.splice(index, 1);
+          this.$q.notify({
+            message: "Note deleted",
+            color: "pink-4",
+            icon: "info",
+          });
+        });
+    },
+    addTask() {
+      this.tasks.push({
+        title: this.addToNote,
+        done: false,
+      });
+      this.addToNote = "";
     },
   },
 };
