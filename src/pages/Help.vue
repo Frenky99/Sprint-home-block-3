@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pl-lg">
+  <q-page class="q-px-lg">
     <div class="text-h2 q-py-lg">
       Help
     </div>

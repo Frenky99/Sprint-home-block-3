@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-px-xl">
-    <h2 class="text-center">Todo</h2>
+    <h2 class="text-center text-h2 white">Todo</h2>
     <q-list>
       <div>
         <q-input
@@ -48,6 +48,10 @@
         </q-item-section>
       </q-item>
     </q-list>
+    <div v-if="!tasks.length" class="text-center absolute-center q-my-xl">
+      <q-icon size="150px" name="mood_bad" class="text-primary"></q-icon>
+      <div class="q-py-md color text-h2">No Task</div>
+    </div>
   </q-page>
 </template>
   
@@ -57,9 +61,9 @@ export default {
     return {
       addToNote: "",
       tasks: [
-        { title: "Unicorn 1", done: false, id: 1 },
-        { title: "Unicorn 2", done: false, id: 2 },
-        { title: "Unicorn 3", done: false, id: 3 },
+        // { title: "Unicorn 1", done: false, id: 1 },
+        // { title: "Unicorn 2", done: false, id: 2 },
+        // { title: "Unicorn 3", done: false, id: 3 },
       ],
     };
   },
@@ -113,5 +117,14 @@ export default {
 
 .q-btn:before {
   box-shadow: none;
+}
+
+.white {
+  color: white;
+}
+
+.color {
+  color: $primary;
+  opacity: 0.7;
 }
 </style>
