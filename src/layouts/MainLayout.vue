@@ -81,9 +81,9 @@
 
     <q-page-container>
       <!-- keep нам помогает в том, чтобы при переключении между страничками наши динамические данные не пропадали -->
-      <keep-alive>
-        <router-view />
-      </keep-alive>
+      <!-- router-view> больше нельзя использовать непосредственно внутри <transition> или <keep-alive>,
+        можно закинуть сначала роутер, потом нужный нам кэшируемый элемент обернуть в keep -->
+      <router-view />
     </q-page-container>
   </q-layout>
 </template>
@@ -173,5 +173,9 @@ export default defineComponent({
 
 .q-drawer-bacground {
   background: #e069b9;
+}
+
+.q-scrollarea__content {
+   background: #f6daed;
 }
 </style>
